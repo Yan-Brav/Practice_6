@@ -12,4 +12,17 @@ public class CheckOutTable extends BaseTest {
         String name = "John";
         System.out.println(page.getTextRowByName(name));
     }
+    @Test
+    public void checkOutPointsByName(){
+        page = new W3HtmlTablePage(driver);
+        String name = "John";
+        System.out.println(page.getValuePointsByName(name));
+    }
+    //It is negative test.
+    @Test(expected = java.lang.NullPointerException.class)
+    public void checkOutRowByIncorrectlyName(){
+        page = new W3HtmlTablePage(driver);
+        String name = "Vasiya Pupkin";
+        System.out.println(page.getTextRowByName(name));
+    }
 }

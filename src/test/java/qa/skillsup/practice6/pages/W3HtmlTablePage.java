@@ -12,6 +12,7 @@ public class W3HtmlTablePage {
     String baseUrl = "http://www.w3schools.com/html/html_tables.asp";
     private By rows = By.xpath(".//table[@class='w3-table-all']/tbody/tr[position()>1]");
     private By column = By.xpath("td[2]");
+    private By point = By.xpath("td[4]");
 
 
     public W3HtmlTablePage(WebDriver driver) {
@@ -19,8 +20,7 @@ public class W3HtmlTablePage {
         driver.get(baseUrl);
         PageFactory.initElements(driver, this);
     }
-
-    public String getTextRowByName(String name){
+    private WebElement getRowByName(String name){
         List<WebElement> tableRows = driver.findElements(rows);
         WebElement requiredRow = null;
         for (WebElement row : tableRows){
@@ -29,7 +29,14 @@ public class W3HtmlTablePage {
                 break;
             }
         }
-        return requiredRow.getText();
+        return requiredRow;
+    }
+
+    public String getTextRowByName(String name){
+        return getRowByName(name).getText();
+    }
+    public String getValuePointsByName(String name){
+        return getRowByName(name).findElement(point).getText();
     }
 
 }
